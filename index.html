@@ -948,12 +948,17 @@ footer {
 
 /* ── SCROLL FADE IN ── */
 .fade-in {
-  opacity: 0;
-  transform: translateY(24px);
+  opacity: 1;
+  transform: translateY(0);
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
-.fade-in.visible {
+.fade-in.animate {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.fade-in.animate.visible {
   opacity: 1;
   transform: translateY(0);
 }
@@ -1376,8 +1381,11 @@ footer {
   // Scroll fade-in
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  }, { threshold: 0.05 });
+  document.querySelectorAll('.fade-in').forEach(el => {
+    el.classList.add('animate');
+    observer.observe(el);
+  });
 
   // Lock / unlock
   const CODE_HASH = '89002a96d39668df86e0c42348557951b7f85a80173c3c990a9673f3af4925b6';
