@@ -270,17 +270,17 @@ h1.hero-name span { color: var(--teal-light); }
 .btn-outline:hover { border-color: var(--teal-light); color: var(--teal-light); transform: translateY(-2px); }
 
 .hero-stats {
-  position: absolute;
-  right: 5vw;
-  bottom: 80px;
   display: flex;
-  flex-direction: column;
-  gap: 24px;
-  z-index:1;
+  flex-direction: row;
+  gap: 48px;
+  flex-wrap: wrap;
+  margin-top: 56px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
 }
 
 .stat {
-  text-align: right;
+  text-align: left;
 }
 
 .stat-num {
@@ -964,8 +964,6 @@ footer {
   .strengths-grid { grid-template-columns: 1fr; }
   .strength-card.full { grid-column: span 1; }
   .sub-grid { grid-template-columns: 1fr 1fr; }
-  .hero-stats { position: static; flex-direction: row; gap: 40px; margin-top: 48px; }
-  .stat { text-align: left; }
 }
 
 @media (max-width: 640px) {
@@ -1072,7 +1070,7 @@ footer {
           <div class="contact-icon-box">✉️</div>
           <div>
             <div class="contact-label">Email</div>
-            <div class="contact-value"><a href="mailto:anil@anilthomas.info">anil@anilthomas.info</a></div>
+            <div class="contact-value"><a href="/cdn-cgi/l/email-protection#4d2c2324210d2c232421392522202c3e6324232b22"><span class="__cf_email__" data-cfemail="bbdad5d2d7fbdad5d2d7cfd3d4d6dac895d2d5ddd4">[email&#160;protected]</span></a></div>
           </div>
         </div>
         <div class="contact-row">
@@ -1358,7 +1356,7 @@ footer {
 <!-- FOOTER -->
 <footer>
   <div class="footer-name">Anil P. <span>Thomas</span></div>
-  <div class="footer-copy">Senior Technical Manager · Aluva, Kerala, India · anil@anilthomas.info</div>
+  <div class="footer-copy">Senior Technical Manager · Aluva, Kerala, India · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2647484f4a6647484f4a524e494b4755084f484049">[email&#160;protected]</a></div>
 </footer>
 
 <!-- LOCK BAR -->
@@ -1368,7 +1366,7 @@ footer {
   <input type="password" id="codeInput" maxlength="5" placeholder="·····" autocomplete="off" />
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Hamburger menu
   const hamburger = document.getElementById('hamburger');
   const mobileNav = document.getElementById('mobileNav');
@@ -1412,16 +1410,4 @@ footer {
   });
 
   // Skill bar animation on scroll
-  const skillObserver = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.querySelectorAll('.skill-fill').forEach(bar => {
-          bar.style.width = bar.style.getPropertyValue('--w') || '0%';
-        });
-      }
-    });
-  }, { threshold: 0.2 });
-  document.querySelectorAll('.skills-grid').forEach(el => skillObserver.observe(el));
-</script>
-</body>
-</html>
+  const skillObserver = new IntersectionObserver((entrie
