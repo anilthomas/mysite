@@ -999,23 +999,31 @@
 </div>
 
 <script>
-  const CODE = '59001';
+  const CODE_HASH = '89002a96d39668df86e0c42348557951b7f85a80173c3c990a9673f3af4925b6';
   const input = document.getElementById('codeInput');
   const lockBar = document.getElementById('lockBar');
   const expItems = document.querySelectorAll('.exp-item');
 
-  input.addEventListener('input', () => {
-    if (input.value === CODE) {
-      expItems.forEach(e => e.classList.add('unlocked'));
-      document.querySelectorAll('.edu-item').forEach(e => e.classList.add('unlocked'));
-      lockBar.classList.add('unlocked-bar');
-      lockBar.querySelector('.lock-icon').textContent = '🔓';
-      lockBar.querySelector('label').textContent = 'Companies unlocked';
-      input.style.display = 'none';
-    } else if (input.value.length === 5) {
-      input.classList.add('wrong');
-      input.value = '';
-      setTimeout(() => input.classList.remove('wrong'), 500);
+  async function hashInput(str) {
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+  }
+
+  input.addEventListener('input', async () => {
+    if (input.value.length === 5) {
+      const hash = await hashInput(input.value);
+      if (hash === CODE_HASH) {
+        expItems.forEach(e => e.classList.add('unlocked'));
+        document.querySelectorAll('.edu-item').forEach(e => e.classList.add('unlocked'));
+        lockBar.classList.add('unlocked-bar');
+        lockBar.querySelector('.lock-icon').textContent = '🔓';
+        lockBar.querySelector('label').textContent = 'Unlocked';
+        input.style.display = 'none';
+      } else {
+        input.classList.add('wrong');
+        input.value = '';
+        setTimeout(() => input.classList.remove('wrong'), 500);
+      }
     }
   });
 </script>
