@@ -974,15 +974,15 @@
         <div class="edu-item">
           <div class="edu-icon">🎓</div>
           <div>
-            <div class="edu-name">Executive MBA</div>
-            <div class="edu-inst">National Institute of Management &nbsp;·&nbsp; 2009</div>
+            <div class="edu-name"><span class="company-locked">Executive MBA</span></div>
+            <div class="edu-inst"><span class="company-locked">National Institute of Management &nbsp;·&nbsp; 2009</span></div>
           </div>
         </div>
         <div class="edu-item">
           <div class="edu-icon">💻</div>
           <div>
-            <div class="edu-name">Diploma in Electronics & Computer Hardware Engineering</div>
-            <div class="edu-inst">Technical Education Board</div>
+            <div class="edu-name"><span class="company-locked">Diploma in Electronics & Computer Hardware Engineering</span></div>
+            <div class="edu-inst"><span class="company-locked">Technical Education Board</span></div>
           </div>
         </div>
       </section>
@@ -1007,6 +1007,7 @@
   input.addEventListener('input', () => {
     if (input.value === CODE) {
       expItems.forEach(e => e.classList.add('unlocked'));
+      document.querySelectorAll('.edu-item').forEach(e => e.classList.add('unlocked'));
       lockBar.classList.add('unlocked-bar');
       lockBar.querySelector('.lock-icon').textContent = '🔓';
       lockBar.querySelector('label').textContent = 'Companies unlocked';
@@ -1020,4 +1021,3 @@
 </script>
 </body>
 </html>
-
