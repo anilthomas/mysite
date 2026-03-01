@@ -639,16 +639,19 @@ h2.section-title {
   font-size: 12px;
 }
 
-.unlocked .company-locked,
-.edu-item.unlocked .company-locked {
-  background: transparent;
-  color: inherit;
-  cursor: default;
+.exp-item.unlocked .company-locked,
+.edu-item.unlocked .company-locked,
+.company-locked.revealed {
+  background: transparent !important;
+  color: inherit !important;
+  cursor: default !important;
 }
 
-.unlocked .company-locked::after,
-.edu-item.unlocked .company-locked::after {
-  content: '';
+.exp-item.unlocked .company-locked::after,
+.edu-item.unlocked .company-locked::after,
+.company-locked.revealed::after {
+  content: '' !important;
+  display: none !important;
 }
 
 .exp-role {
@@ -1533,32 +1536,41 @@ footer {
     observer.observe(el);
   });
 
-  // Lock / unlock
-  const CODE_HASH = '89002a96d39668df86e0c42348557951b7f85a80173c3c990a9673f3af4925b6';
+  // Lock / unlock — XOR obfuscated, works on file:// and all protocols
+  const _k = [14,26,22,19,16];
+  const _e = [59,35,38,35,33];
+  function _chk(s) {
+    if (s.length !== 5) return false;
+    for (let i = 0; i < 5; i++) { if ((s.charCodeAt(i) ^ _k[i]) !== _e[i]) return false; }
+    return true;
+  }
+
   const input = document.getElementById('codeInput');
   const lockBar = document.getElementById('lockBar');
   const lockIcon = document.getElementById('lockIcon');
   const lockLabel = document.getElementById('lockLabel');
 
-  async function hashInput(str) {
-    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
-    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+  function unlockAll() {
+    document.querySelectorAll('.company-locked').forEach(function(el) {
+      el.style.setProperty('background', 'transparent', 'important');
+      el.style.setProperty('color', 'inherit', 'important');
+      el.style.setProperty('cursor', 'default', 'important');
+      el.classList.add('revealed');
+    });
+    lockBar.classList.add('unlocked-bar');
+    lockIcon.textContent = '🔓';
+    lockLabel.textContent = 'Details unlocked';
+    input.style.display = 'none';
   }
 
-  input.addEventListener('input', async () => {
+  input.addEventListener('input', function() {
     if (input.value.length === 5) {
-      const hash = await hashInput(input.value);
-      if (hash === CODE_HASH) {
-        document.querySelectorAll('.exp-item').forEach(e => e.classList.add('unlocked'));
-        document.querySelectorAll('.edu-item').forEach(e => e.classList.add('unlocked'));
-        lockBar.classList.add('unlocked-bar');
-        lockIcon.textContent = '🔓';
-        lockLabel.textContent = 'Details unlocked';
-        input.style.display = 'none';
+      if (_chk(input.value)) {
+        unlockAll();
       } else {
         input.classList.add('wrong');
         input.value = '';
-        setTimeout(() => input.classList.remove('wrong'), 500);
+        setTimeout(function() { input.classList.remove('wrong'); }, 500);
       }
     }
   });
