@@ -140,6 +140,16 @@ nav {
   overflow: hidden;
 }
 
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
 .hero-bg {
   position: absolute;
   inset: 0;
@@ -163,7 +173,86 @@ nav {
 .hero-content {
   position: relative;
   z-index: 1;
-  max-width: 900px;
+}
+
+.hero-right {
+  position: relative;
+  z-index: 1;
+}
+
+.personal-card {
+  background: rgba(13,27,42,0.7);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 36px;
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+.personal-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--teal), var(--gold), var(--teal));
+}
+
+.personal-card-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--teal-light);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.personal-card-tag::before {
+  content: '';
+  width: 20px;
+  height: 1px;
+  background: var(--teal-light);
+}
+
+.personal-card-quote {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  font-style: italic;
+  color: #fff;
+  line-height: 1.7;
+  margin-bottom: 20px;
+  border-left: 3px solid var(--gold);
+  padding-left: 16px;
+}
+
+.personal-card-body {
+  font-size: 13px;
+  color: #7a9aaa;
+  line-height: 1.85;
+  margin-bottom: 24px;
+}
+
+.personal-card-body p { margin-bottom: 12px; }
+.personal-card-body p:last-child { margin-bottom: 0; }
+
+.personal-values {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.value-tag {
+  background: rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,168,76,0.25);
+  color: var(--gold-light);
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
 }
 
 .hero-tag {
@@ -302,7 +391,7 @@ h1.hero-name span { color: var(--teal-light); }
 
 /* ── SECTIONS ── */
 section {
-  padding: 100px 5vw;
+  padding: 70px 5vw;
   position: relative;
 }
 
@@ -966,6 +1055,7 @@ footer {
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
   .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .hero-inner { grid-template-columns: 1fr; gap: 40px; }
   .strengths-grid { grid-template-columns: 1fr; }
   .strength-card.full { grid-column: span 1; }
   .sub-grid { grid-template-columns: 1fr 1fr; }
@@ -1013,40 +1103,61 @@ footer {
 <section id="hero">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
-  <div class="hero-content">
-    <div class="hero-tag">Senior Technical Manager</div>
-    <h1 class="hero-name">Anil P. <span>Thomas</span></h1>
-    <p class="hero-title">
-      18+ years of enterprise IT infrastructure · Cloud · Linux · OpenStack · OpenShift<br>
-      📍 Aluva, Ernakulam, Kerala, India
-    </p>
-    <div class="hero-pills">
-      <span class="pill">RHCE</span>
-      <span class="pill">ITIL Certified</span>
-      <span class="pill">Oracle OCP</span>
-      <span class="pill">OpenStack Certified</span>
-      <span class="pill">OpenShift Certified</span>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-tag">Senior Technical Manager</div>
+      <h1 class="hero-name">Anil P. <span>Thomas</span></h1>
+      <p class="hero-title">
+        18+ years of enterprise IT infrastructure · OpenStack · Azure · AWS · GCP · OpenShift<br>
+        📍 Aluva, Ernakulam, Kerala, India
+      </p>
+      <div class="hero-pills">
+        <span class="pill">RHCE</span>
+        <span class="pill">ITIL Certified</span>
+        <span class="pill">Oracle OCP</span>
+        <span class="pill">OpenStack Certified</span>
+        <span class="pill">OpenShift Certified</span>
+      </div>
+      <div class="hero-ctas">
+        <a href="#experience" class="btn-primary">View Experience</a>
+        <a href="#about" class="btn-outline">Get In Touch</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-num">18<span>+</span></div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">50<span>+</span></div>
+          <div class="stat-label">Engineers Led</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">40<span>%</span></div>
+          <div class="stat-label">Downtime Reduced</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">5<span>+</span></div>
+          <div class="stat-label">Certifications</div>
+        </div>
+      </div>
     </div>
-    <div class="hero-ctas">
-      <a href="#experience" class="btn-primary">View Experience</a>
-      <a href="#about" class="btn-outline">Get In Touch</a>
-    </div>
-    <div class="hero-stats">
-      <div class="stat">
-        <div class="stat-num">18<span>+</span></div>
-        <div class="stat-label">Years Experience</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">50<span>+</span></div>
-        <div class="stat-label">Engineers Led</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">40<span>%</span></div>
-        <div class="stat-label">Downtime Reduced</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">5<span>+</span></div>
-        <div class="stat-label">Certifications</div>
+
+    <div class="hero-right">
+      <div class="personal-card">
+        <div class="personal-card-tag">A little about me</div>
+        <div class="personal-card-quote">"Technology is not just my profession — it is my passion, my classroom, and my way of giving back."</div>
+        <div class="personal-card-body">
+          <p>Over nearly two decades in the field, I have come to believe that the greatest privilege in technology is not just solving complex problems — it is sharing what you have learned so others can stand on your shoulders.</p>
+          <p>I approach every new technology — whether it is a new cloud platform, a container orchestration tool, or a storage architecture — with the same curiosity I had on day one. That hunger to understand things deeply, not just make them work, is what has kept me growing through every shift the industry has taken.</p>
+          <p>I mentor engineers not by giving answers, but by teaching them how to find them — how to read logs methodically, think in systems, and build the confidence to tackle the unknown. Because the best lesson I ever learned in tech is this: <em style="color:#c8d8e0;">the problem in front of you is never as scary as the one you haven't seen yet.</em></p>
+        </div>
+        <div class="personal-values">
+          <span class="value-tag">🌱 Lifelong Learner</span>
+          <span class="value-tag">🤝 Mentor & Coach</span>
+          <span class="value-tag">🔍 Curiosity-Driven</span>
+          <span class="value-tag">⚙️ Systems Thinker</span>
+          <span class="value-tag">🌍 Multi-Cloud Navigator</span>
+        </div>
       </div>
     </div>
   </div>
@@ -1059,9 +1170,9 @@ footer {
     <h2 class="section-title">Profile Summary</h2>
     <div class="about-grid">
       <div class="about-text">
-        <p>Results-driven Senior Technical Manager with over 18 years of progressive experience in enterprise IT infrastructure, cloud operations, and cross-functional team leadership. Renowned for architecting robust, high-availability systems and orchestrating seamless transitions to cloud platforms including OpenStack and AWS.</p>
-        <p>Distinguished by expert-level Bash scripting capabilities — developing sophisticated automation frameworks that have consistently reduced manual overhead and incident response times by up to 50%. Combines deep technical proficiency in Linux and Windows environment troubleshooting with strong strategic acumen.</p>
-        <p>Consistently delivering cost-effective, scalable, and secure solutions for global clients across hosting, cloud, and enterprise environments.</p>
+        <p>Results-driven Senior Technical Manager with over 18 years of progressive experience in enterprise IT infrastructure, cloud operations, and cross-functional team leadership. Renowned for architecting robust, high-availability systems and orchestrating seamless transitions to multi-cloud platforms including OpenStack, Microsoft Azure, AWS, Google Cloud (GCP), DigitalOcean, and Hetzner.</p>
+        <p>Distinguished by expert-level Bash scripting capabilities — developing sophisticated automation frameworks that have consistently reduced manual overhead and incident response times by up to 50%. Combines deep technical proficiency in Linux and Windows environment troubleshooting with proven expertise in Azure Active Directory, VNet/NSG networking, and cross-platform cloud integration.</p>
+        <p>Consistently delivering cost-effective, scalable, and secure solutions for global clients across private, public, and hybrid cloud environments.</p>
       </div>
       <div class="about-contact">
         <div class="contact-row">
@@ -1114,7 +1225,7 @@ footer {
         <div class="skill-item"><div class="skill-header"><span class="skill-name">Linux Administration & Troubleshooting</span><span class="skill-pct">97%</span></div><div class="skill-bar"><div class="skill-fill" style="--w:97%"></div></div></div>
         <div class="skill-item"><div class="skill-header"><span class="skill-name">Bash Scripting & Automation</span><span class="skill-pct">96%</span></div><div class="skill-bar"><div class="skill-fill" style="--w:96%"></div></div></div>
         <div class="skill-item"><div class="skill-header"><span class="skill-name">OpenStack Administration & Troubleshooting</span><span class="skill-pct">94%</span></div><div class="skill-bar"><div class="skill-fill" style="--w:94%"></div></div></div>
-        <div class="skill-item"><div class="skill-header"><span class="skill-name">Cloud Infrastructure</span><span class="skill-pct">92%</span></div><div class="skill-bar"><div class="skill-fill" style="--w:92%"></div></div></div>
+        <div class="skill-item"><div class="skill-header"><span class="skill-name">Multi-Cloud Infrastructure (OpenStack, Azure, AWS, GCP)</span><span class="skill-pct">92%</span></div><div class="skill-bar"><div class="skill-fill" style="--w:92%"></div></div></div>
         <div class="skill-item"><div class="skill-header"><span class="skill-name">Team Leadership</span><span class="skill-pct">93%</span></div><div class="skill-bar"><div class="skill-fill" style="--w:93%"></div></div></div>
       </div>
       <div class="skill-block">
@@ -1126,7 +1237,7 @@ footer {
       </div>
     </div>
     <div class="tech-tags">
-      <span class="tag">OpenStack</span><span class="tag">AWS</span><span class="tag">VMware</span><span class="tag">Ceph</span><span class="tag">Docker</span><span class="tag">KVM</span><span class="tag">Xen</span><span class="tag">OpenVZ</span><span class="tag">Ansible</span><span class="tag">Puppet</span><span class="tag">Bash</span><span class="tag">Perl</span><span class="tag">Apache</span><span class="tag">MySQL</span><span class="tag">Oracle</span><span class="tag">DNS</span><span class="tag">Varnish</span><span class="tag">Git</span><span class="tag">TeamCity</span><span class="tag">Iptables</span><span class="tag">CSF</span><span class="tag">LiteSpeed</span><span class="tag">Packer</span><span class="tag">RabbitMQ</span><span class="tag">Ceph RBD</span><span class="tag">Ceph RGW</span><span class="tag">GitLab</span><span class="tag">SVN</span><span class="tag">Bitbucket</span><span class="tag">OpenShift</span><span class="tag">Kubernetes</span><span class="tag">Podman</span><span class="tag">Helm</span><span class="tag">oc CLI</span>
+      <span class="tag">OpenStack</span><span class="tag">AWS</span><span class="tag">Azure</span><span class="tag">GCP</span><span class="tag">DigitalOcean</span><span class="tag">Hetzner</span><span class="tag">Azure AD</span><span class="tag">VNet/NSG</span><span class="tag">VMware</span><span class="tag">Ceph</span><span class="tag">Docker</span><span class="tag">KVM</span><span class="tag">Xen</span><span class="tag">OpenVZ</span><span class="tag">Ansible</span><span class="tag">Puppet</span><span class="tag">Bash</span><span class="tag">Perl</span><span class="tag">Apache</span><span class="tag">MySQL</span><span class="tag">Oracle</span><span class="tag">DNS</span><span class="tag">Varnish</span><span class="tag">Git</span><span class="tag">TeamCity</span><span class="tag">Iptables</span><span class="tag">CSF</span><span class="tag">LiteSpeed</span><span class="tag">Packer</span><span class="tag">RabbitMQ</span><span class="tag">Ceph RBD</span><span class="tag">Ceph RGW</span><span class="tag">GitLab</span><span class="tag">SVN</span><span class="tag">Bitbucket</span><span class="tag">OpenShift</span><span class="tag">Kubernetes</span><span class="tag">Podman</span><span class="tag">Helm</span><span class="tag">oc CLI</span>
     </div>
   </div>
 </section>
@@ -1144,8 +1255,10 @@ footer {
         <div class="exp-role">Senior Technical Manager</div>
         <ul class="exp-bullets">
           <li>Directed end-to-end management of servers co-located across remote data centres, maintaining consistent high performance and near-zero unplanned downtime.</li>
-          <li>Spearheaded a full-scale migration from dedicated server infrastructure to a scalable OpenStack cloud environment, reducing capital expenditure significantly.</li>
+          <li>Spearheaded a full-scale migration from dedicated server infrastructure to a scalable OpenStack private cloud environment, reducing capital expenditure significantly.</li>
           <li>Architected and administered OpenStack services (CLI & API) integrated with Ceph distributed storage for resilient, scalable data management.</li>
+          <li>Managed hybrid cloud workloads across OpenStack, Microsoft Azure (VMs, VNet, NSG, Azure AD), and AWS — ensuring seamless interoperability and consistent security policy enforcement.</li>
+          <li>Evaluated and onboarded DigitalOcean and Hetzner cloud environments for cost-optimised workloads, configuring networking, firewalls, and automated provisioning pipelines.</li>
           <li>Defined infrastructure standards and best practices, mentoring a team of engineers to elevate operational efficiency and service quality.</li>
           <li>Collaborated with cross-functional stakeholders to align IT strategy with business objectives, driving continuous service improvement initiatives.</li>
         </ul>
@@ -1163,9 +1276,9 @@ footer {
         <div class="exp-company"><span class="company-locked">VIPoint Solutions</span></div>
         <div class="exp-role">Team Manager — Linux Infrastructure</div>
         <ul class="exp-bullets">
-          <li>Led and mentored a team of 20+ engineers delivering 24/7 Linux server support for a diverse global client portfolio.</li>
+          <li>Led and mentored a team of 20+ engineers delivering 24/7 Linux server support for a diverse global client portfolio spanning dedicated, VPS, and cloud-hosted environments.</li>
           <li>Served as the primary escalation authority for L3/L4 incidents, providing expert-level root cause analysis and proactive preventative measures.</li>
-          <li>Administered hosting, database, and bespoke server environments — hardening security posture and optimising performance across the fleet.</li>
+          <li>Administered hosting, database, and bespoke server environments across dedicated infrastructure as well as AWS and early cloud platforms — hardening security posture and optimising performance across the fleet.</li>
           <li>Established SLA frameworks and monitoring protocols that ensured consistent service delivery against agreed performance benchmarks.</li>
         </ul>
         <div class="achievements-box">
@@ -1292,6 +1405,39 @@ footer {
           <div class="scm-item"><div class="scm-item-title">SVN (Subversion)</div><div class="scm-item-desc">Repository administration and maintenance, including successful migrations from SVN to Git with full history preservation.</div></div>
           <div class="scm-item"><div class="scm-item-title">GitLab — Self-Hosted Installation & Maintenance</div><div class="scm-item-desc">End-to-end installation, configuration, and maintenance of self-hosted GitLab — CI/CD pipelines, Runners, user access, group permissions, SSL, upgrades, backup & restore for multiple projects and teams.</div></div>
           <div class="scm-item"><div class="scm-item-title">GitHub & Bitbucket</div><div class="scm-item-desc">Collaborative development, pull request workflows, and integration with CI/CD toolchains.</div></div>
+        </div>
+      </div>
+
+      <!-- Multi-Cloud full width -->
+      <div class="strength-card full" style="border-color:rgba(201,168,76,0.2);">
+        <div class="strength-icon">🌍</div>
+        <div class="strength-title">Multi-Cloud Environment Experience</div>
+        <div class="strength-desc">Hands-on experience managing workloads across multiple public and private cloud platforms — selecting the right environment for each workload based on cost, performance, compliance, and geographical requirements.</div>
+        <div class="sub-grid" style="margin-top:16px;">
+          <div class="sub-card" style="border-left:3px solid #0078d4;">
+            <div class="sub-card-title" style="color:#5ba3e0;">🔵 Microsoft Azure</div>
+            <div class="sub-card-desc">Azure VMs & Compute — provisioning, scaling, and managing virtual machines. Azure Networking — VNet design, NSG rules, subnets, and peering. Azure Active Directory — user management, SSO, group policies, and enterprise identity integration.</div>
+          </div>
+          <div class="sub-card" style="border-left:3px solid #ff9900;">
+            <div class="sub-card-title" style="color:#e0a050;">🟠 Amazon Web Services (AWS)</div>
+            <div class="sub-card-desc">EC2 instance management, S3 storage, VPC networking, IAM policies, and security groups. Experience migrating on-premises and dedicated server workloads to AWS cloud infrastructure.</div>
+          </div>
+          <div class="sub-card" style="border-left:3px solid #4285f4;">
+            <div class="sub-card-title" style="color:#6aa3f5;">🔴 Google Cloud Platform (GCP)</div>
+            <div class="sub-card-desc">GCP compute and infrastructure management — VM instances, networking, firewall rules, and cloud storage — supporting workload deployments and hybrid integration with on-premises environments.</div>
+          </div>
+          <div class="sub-card" style="border-left:3px solid #0069ff;">
+            <div class="sub-card-title" style="color:#5a9fff;">🌊 DigitalOcean</div>
+            <div class="sub-card-desc">Droplet provisioning, managed databases, Spaces object storage, VPC networking, and firewall configuration — leveraged for cost-effective hosting of client workloads and development environments.</div>
+          </div>
+          <div class="sub-card" style="border-left:3px solid #d50c2d;">
+            <div class="sub-card-title" style="color:#e05a6a;">🏠 Hetzner Cloud & Dedicated</div>
+            <div class="sub-card-desc">Hetzner Cloud servers, dedicated root servers, and private networking — used for high-performance, cost-optimised European hosting deployments with custom OS installations and network configurations.</div>
+          </div>
+          <div class="sub-card" style="border-left:3px solid var(--teal);">
+            <div class="sub-card-title">🔒 Cross-Cloud Security & Governance</div>
+            <div class="sub-card-desc">Enforcing consistent security policies, IAM practices, network segmentation, and compliance standards across heterogeneous multi-cloud environments — reducing attack surface and ensuring audit readiness.</div>
+          </div>
         </div>
       </div>
 
