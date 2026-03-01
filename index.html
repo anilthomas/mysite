@@ -1576,4 +1576,17 @@ footer {
   });
 
   // Skill bar animation on scroll
-  const skillObserver = new IntersectionObserver((entrie
+  const skillObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.skill-fill').forEach(bar => {
+          bar.style.width = getComputedStyle(bar).getPropertyValue('--w') || bar.style.getPropertyValue('--w') || '0%';
+        });
+      }
+    });
+  }, { threshold: 0.2 });
+  document.querySelectorAll('.skills-grid').forEach(el => skillObserver.observe(el));
+
+</script>
+</body>
+</html>
